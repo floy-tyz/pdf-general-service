@@ -1,0 +1,11 @@
+database/data
+
+nginx/acme.sh
+nginx/certs
+nginx/conf.d
+nginx/html
+nginx/vhost.d
+
+.env.local
+
+/.idea
