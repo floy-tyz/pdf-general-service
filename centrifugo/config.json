@@ -1,0 +1,21 @@
+{
+    "log_level": "debug",
+    "token_hmac_secret_key": "e2994fab-3c95-43b4-9092-c66293e48562",
+    "api_key": "f78c5653-9aa3-4eef-a062-4794af37fac1",
+    "allowed_origins": [
+        "api.pdf.local"
+    ],
+    "uni_sse": true,
+
+    "allow_subscribe_for_anonymous": true,
+    "allow_subscribe_for_client": true,
+    "allow_history_for_anonymous": true,
+
+    "history_size": 100,
+    "force_recovery": true,
+    "history_ttl": "600s",
+
+    "admin_password": "d0683813-0916-4c49-979f-0e08a686b727",
+    "admin_secret": "4e9eafcf-0120-4ddd-b668-8dc40072c78e",
+    "admin": true
+}

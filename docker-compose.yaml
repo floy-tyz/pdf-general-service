@@ -6,12 +6,11 @@ services:
         image: nginxproxy/nginx-proxy:alpine
         container_name: pdf-reverse-proxy-nginx
         restart: unless-stopped
+        environment:
+            - HTTPS_METHOD=noredirect
         volumes:
             - ${DOCKER_SOCK_ROOTLESS_PATH:-/var/run/docker.sock}:/tmp/docker.sock:ro
             - ${NGINX_FILES_PATH:-./nginx}/conf.d:/etc/nginx/conf.d
-            - ${NGINX_FILES_PATH:-./nginx}/vhost.d:/etc/nginx/vhost.d
-            - ${NGINX_FILES_PATH:-./nginx}/html:/usr/share/nginx/html
-            - ${NGINX_FILES_PATH:-./nginx}/certs:/etc/nginx/certs:ro
             - ${NGINX_FILES_PATH:-./nginx}/nginx.conf:/etc/nginx/nginx.conf
         ports:
             - "80:80"
@@ -48,6 +47,17 @@ services:
             - "15672:15672"
         networks:
             - rabbitmq
+    
+    centrifugo:
+        container_name: ${CONTAINER_NAME:-unnamed}-centrifugo
+        image: centrifugo/centrifugo:v5
+        volumes:
+            - ./centrifugo/config.json:/centrifugo/config.json
+        command: centrifugo -c config.json
+        ports:
+            - "8000:8000"
+        networks:
+            - centrifugo
 
 networks:
     proxy:
@@ -56,4 +66,8 @@ networks:
         
     rabbitmq:
         driver: bridge
-        name: pdf_frontend_rabbitmq
+        name: pdf_api_rabbitmq
+    
+    centrifugo:
+        driver: bridge
+        name: pdf_api_centrifugo
