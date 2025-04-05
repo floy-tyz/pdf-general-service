@@ -1,4 +1,5 @@
-database/data
+postgres/data
+minio/data
 
 nginx/acme.sh
 nginx/certs
@@ -6,6 +7,6 @@ nginx/conf.d
 nginx/html
 nginx/vhost.d
 
-.env.local
+.env
 
 /.idea
